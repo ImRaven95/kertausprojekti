@@ -1,0 +1,19 @@
+{
+  "name": "kertausprojekti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node database_layer.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "i": "^0.3.7",
+    "mysql": "^2.18.1",
+    "vite": "^4.4.9"
+  }
+}
