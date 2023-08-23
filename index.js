@@ -16,23 +16,17 @@ const { port, host } = require('./config.json');
 app.use(cors());
 app.use(express.json());
 
-//get request to get all the data from the database
-app.get('/api/concerts', (req, res) => {
-    getAllConcerts().then((rows) => {
-        res.json(rows);
-    }).catch((err) => {
-        res.json(err);
-    });
+// GET all the data in one get request
+app.get('/api/concerts', async (req, res) => {
+    const data = await getAllConcerts();
+    res.json(data);
 });
 
-app.get('/api/bands', (req, res) => {
-    getAllbands().then((rows) => {
-        res.json(rows);
-    }).catch((err) => {
-        res.json(err);
-    });
+app.get('/api/bands', async (req, res) => {
+    const data = await getAllbands();
+    res.json(data);
 });
 
 app.listen(port, host, () => {
-    console.log(`Server running on http://${host}:${port}`);
+    console.log(`Server running at http://${host}:${port}/`);
 });

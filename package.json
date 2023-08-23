@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node database_layer.js"
+    "dev": "",
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

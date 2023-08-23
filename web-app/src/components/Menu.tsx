@@ -1,4 +1,6 @@
+// Desc: This file contains the menu component that is used in the NavBar component
 import { Transition } from '@headlessui/react';
+import { useEffect } from 'react';
 
 
 interface Props {
@@ -8,6 +10,23 @@ interface Props {
 
 export default function Menu({ isOpen, onClose}: Props) {
     
+    //Listening for the mousedown event when the menu is open to close it when the user clicks outside of the menu
+    useEffect(() => {
+        const handleMouseDown = (event: MouseEvent) => {
+            if (isOpen) {
+                const target = event.target as HTMLElement;
+                if (!target.closest('.menu')) {
+                    onClose();
+                }
+            }
+        };
+        document.addEventListener('mousedown', handleMouseDown);
+        return () => {
+            document.removeEventListener('mousedown', handleMouseDown);
+        };
+    }, [isOpen, onClose]);
+
+
     return (
         <Transition
             show={isOpen}

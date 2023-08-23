@@ -1,15 +1,21 @@
 import './main.css'
+import { useState } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import { getAllConcerts } from ''
+
+
 
 function App() {
+
+  
 
   return (
     <>
       <NavBar />
       <main>
         <div className='flex justify-center p-5'>
-          <img className='w-full' src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' alt='banner' />
+          <img className='md:w-1/2 w-full ' src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' alt='banner' />
         </div>
 
         <h1 className='text-center'>
