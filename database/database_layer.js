@@ -161,7 +161,7 @@ const getConcertsByDate = () => {
             JOIN connection AS con ON c.id = con.show_id
             JOIN city AS ci ON c.city_id = ci.id
             JOIN bands AS b ON con.band_id = b.id
-            ORDER BY c.date ASC;
+            GROUP BY c.date
         `;
 
         connection.query(query, (err, rows) => {
@@ -174,7 +174,7 @@ const getConcertsByDate = () => {
     });
 };
 
-const runFunctions = () => {
+/*const runFunctions = () => {
     
     getAllBandsByConcertId(1).then((rows) => {
         console.log(rows)
@@ -212,7 +212,7 @@ const runFunctions = () => {
     }).catch((err) => {
         console.log(err)
     });
-}
+}*/
 
 module.exports = {
     getAllConcerts,
@@ -223,6 +223,5 @@ module.exports = {
     getConcertsByBandId,
     getConcertWithMostBands,
     getConcertsByDate,
-    runFunctions
 }
 

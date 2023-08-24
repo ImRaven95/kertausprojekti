@@ -1,60 +1,96 @@
 import './main.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
-import { getAllConcerts } from ''
 
 
 
 function App() {
+  const [bands, setBands] = useState<Band[] | null>(null)
+  const [concerts, setConcerts] = useState<Concert[] | null>(null)
+  const [loaded, setLoaded] = useState(false)
 
-  
+  useEffect(() => {
+     async function fetchData() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const res = await Promise.all([fetch('http://localhost:3000/api/concerts'), fetch('http://localhost:3000/api/bands')]) as any;
+      const concertsResponse = res[0];
+      const bandResponse = res[1];
+
+      const bandData = await bandResponse.json() as Band[];
+
+      let concertData = await concertsResponse.json() as Concert[];
+      concertData = concertData.map((concert: Concert) => {
+        concert.date = new Date(concert.date).toLocaleDateString()
+      return concert;
+        
+      
+    });
+      setConcerts(concertData);
+      setBands(bandData);
+      setLoaded(true);
+    }
+    fetchData();
+  }, [])
+
+  interface Band {
+    id: number;
+    name: string;
+    bio: string;
+  }
+
+  interface Concert {
+    id: number;
+    name: string;
+    date: string;
+    info: string;
+    bands: string;
+  }
 
   return (
     <>
       <NavBar />
-      <main>
-        <div className='flex justify-center p-5'>
-          <img className='md:w-1/2 w-full ' src='https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80' alt='banner' />
-        </div>
+      <header>
+        <div className='bg-hero bg-cover bg-center bg-no-repeat shadow-lg'>
+          <p className='text-center p-20'>Hero</p>
 
+        </div>
+      </header>
+      <main>
         <h1 className='text-center'>
           Other Concerts
         </h1>
+        
+        {loaded ? (
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 1</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 2</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 3</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-        </div>
+        <><div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
+              
+              {concerts!.map((concert) => (
+              <div  key={concert.id} className='bg-primary-black p-5 text-primary-white rounded-lg'>
+                <h2 className=''>{concert.name}</h2>
+                <p className='pb-2'>{concert.date}</p>
+                <p className=''>{concert.info}</p>
+              </div>
+              ))}
+              
 
-        <h1 className='text-center'> 
-          Featured Artists
-        </h1>
+            </div>
+              <h1 className='text-center'>
+                Featured Bands
+              </h1>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
 
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 1</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 2</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-          <div className='bg-primary-black p-5 text-primary-white'>
-            <h2>Box 3</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, voluptas.</p>
-          </div>
-        </div>
+                {bands!.map((band) => (
+                  <div className='bg-primary-black p-5 text-primary-white'>
+                    <h2>{band.name}</h2>
+                    <p>{band.bio}</p>
+                  </div>
+                ))}
+              </div></>
+        ) : (
+          <h1>Loading...</h1>
+        )}
+        
 
       </main>
       <Footer />

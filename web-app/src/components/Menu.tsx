@@ -42,7 +42,14 @@ export default function Menu({ isOpen, onClose}: Props) {
                     <h3 className="text-gray-800 font-bold text-xl mb-3">Menu</h3>
                     <ul className="mt-2">
                         <li>
-              
+                            <a href="/" className="text-gray-600 hover:text-gray-800">
+                                Concerts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/" className="text-gray-600 hover:text-gray-800">
+                                Artists
+                            </a>
                         </li>
                         <button>
               
