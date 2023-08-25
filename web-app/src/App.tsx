@@ -49,10 +49,10 @@ function App() {
 
   return (
     <>
-      <NavBar />
-      <header>
-        <div className='bg-hero bg-cover bg-center bg-no-repeat shadow-lg'>
-          <p className='text-center p-20'>Hero</p>
+      <header className='bg-hero bg-cover bg-center bg-no-repeat drop-shadow-2xl'>
+        <NavBar />
+        <div className=''>
+          <p className='text-center p-20'></p>
 
         </div>
       </header>
@@ -63,30 +63,33 @@ function App() {
         
         {loaded ? (
 
-        <><div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
+        <>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
               
               {concerts!.map((concert) => (
-              <div  key={concert.id} className='bg-primary-black p-5 text-primary-white rounded-lg'>
-                <h2 className=''>{concert.name}</h2>
+              <div  key={concert.id} className='bg-primary-white p-5  rounded-lg drop-shadow-lg'>
+                <h2 className='text-card-text-blue'>{concert.name}</h2>
                 <p className='pb-2'>{concert.date}</p>
                 <p className=''>{concert.info}</p>
               </div>
               ))}
-              
-
             </div>
-              <h1 className='text-center'>
+            <div className='rounded-lg'>
+              <h1 className='text-center text-xl bg-primary-blue bg-opacity-5 p-2'>
                 Featured Bands
               </h1>
               <div className='grid grid-cols-1 md:grid-cols-3 gap-4 p-5'>
 
                 {bands!.map((band) => (
-                  <div className='bg-primary-black p-5 text-primary-white'>
-                    <h2>{band.name}</h2>
+                  <div className=' bg-primary-white rounded-lg drop-shadow-lg p-5'>
+                    <h2 className='pb-2 text-card-text-blue'>{band.name}</h2>
                     <p>{band.bio}</p>
                   </div>
                 ))}
-              </div></>
+              </div>
+            </div>
+          </>
+
         ) : (
           <h1>Loading...</h1>
         )}

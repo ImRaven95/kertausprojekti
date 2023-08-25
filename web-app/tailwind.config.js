@@ -11,8 +11,12 @@ export default {
       }
     },
     colors: {
-      'primary-black': '#333',
-      'primary-white': '#FAF9F6'
+      'primary-black': '#32353c',
+      'primary-white': '#FAF9F6',
+      'primary-blue': '#003366',
+      'secondary-white': '#F9F6EE',
+      'primary-orange': '#cc5500',
+      'card-text-blue': '#1588fc',
     }
   },
   plugins: [],

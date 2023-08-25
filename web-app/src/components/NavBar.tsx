@@ -15,8 +15,8 @@ export default function NavBar() {
 
     return (
         <>
-            <nav className='bg-primary-black p-2'>
-                <button className='text-primary-white' onClick={handleMenuClick}>
+            <nav className='flex flex-1 items-end justify-end bg-primary-black bg-opacity-30'>
+                <button className='text-primary-white p-4' onClick={handleMenuClick}>
                     <FontAwesomeIcon icon={faBars} />
                 </button>
             </nav>
